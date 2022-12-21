@@ -1,4 +1,14 @@
 class UIRenderer {
+    static DrawFrame(shader, frame) {
+        shader.Start();
+        shader.LoadFloat(shader.z_index_location, frame.z_index);
+        shader.LoadVector3(shader.color_location, frame.color);
+        shader.LoadMatrix4(shader.transformation_matrix_location, MatrixHandler.CreateTransformationMatrix(frame.transform));
+
+        frame.Draw();
+        shader.Stop();
+    }
+
     static DrawButton(shader, button) {
         shader.Start();
         shader.LoadFloat(shader.z_index_location, button.z_index);
@@ -12,6 +22,7 @@ class UIRenderer {
             UIRenderer.DrawTextLabel(shader, button.text_label);
         }
     }
+
     static DrawTextLabel(shader, text_label) {
         shader.Start();
         shader.LoadFloat(shader.z_index_location, text_label.z_index);

@@ -12,6 +12,8 @@ class Display {
         Display.width = innerWidth;
         Display.height = innerHeight;
 
+        gl.sampleCoverage(2.0, false);
+
         Display.background_color = new Vector3(0.0, 0.0, 0.0);
 
         gl.enable(gl.BLEND);
