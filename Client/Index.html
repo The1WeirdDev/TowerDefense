@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>Tower Defense</title>
+        <link rel="stylesheet" type="text/css" href="Client/Style.css">
+
+        <canvas id="game_canvas"></canvas>
+    </head>
+
+    <body>
+        <div id="scripts">
+            
+            <!-- Display -->
+            <script src="Client/Scripts/Core/Display/Display.js"></script>
+            <script src="Client/Scripts/Core/Display/Texture.js"></script>
+
+            <!-- Shaders -->
+            <script src="Client/Scripts/Core/Display/Shader/Shader.js"></script>
+            <script src="Client/Scripts/Core/Display/Shader/Shaders/ShapeTexturelessShader.js"></script>
+            
+            <!-- Renderers -->
+            <script src="Client/Scripts/Core/Display/Renderers/UIRenderer.js"></script>
+            
+            <!-- Screens -->
+            <script src="Client/Scripts/Core/Screen/ScreenHandler.js"></script>
+            <script src="Client/Scripts/Core/Screen/Screens/MainMenu.js"></script>
+            <script src="Client/Scripts/Core/Screen/Screens/LoadingScreen.js"></script>
+            <script src="Client/Scripts/Core/Screen/Screens/LobbyScreen.js"></script>
+            
+            <!-- Mesh -->
+            <script src="Client/Scripts/Core/Display/Mesh/Mesh.js"></script>
+            <script src="Client/Scripts/Core/Display/Mesh/Meshes/BasicMesh.js"></script>
+            <script src="Client/Scripts/Core/Display/Mesh/Meshes/TexturedMesh.js"></script>
+            
+            <!-- Generators -->
+            <script src="Client/Scripts/Core/Display/Mesh/Generators/Polygon.js"></script>
+            <script src="Client/Scripts/Core/Display/Mesh/Generators/ShapeMeshGenerator.js"></script>
+            <script src="Client/Scripts/Core/Display/Mesh/Generators/TextMeshGenerator.js"></script>
+            
+            <!-- UI -->
+            <script src="Client/Scripts/Core/UI/UI.js"></script>
+            <script src="Client/Scripts/Core/UI/Frame.js"></script>
+            <script src="Client/Scripts/Core/UI/Button.js"></script>
+            <script src="Client/Scripts/Core/UI/TextLabel.js"></script>
+            
+            <!-- Math -->
+            <script src="Client/Scripts/Core/Math/Transform2D.js"></script>
+            <script src="Client/Scripts/Core/Math/Maths.js"></script>
+            <script src="Client/Scripts/Core/Math/MatrixHandler.js"></script>
+            <script src="Client/Scripts/Core/Math/Vector2.js"></script>
+            <script src="Client/Scripts/Core/Math/Vector3.js"></script>
+            
+            <!-- Networking -->
+            <script src="Client/Scripts/Core/Networking/NetworkHandler.js"></script>
+            <script src="Client/Scripts/Core/Networking/PacketTypes.js"></script>
+            
+            <!-- Libraries -->
+            <script src="socket.io/socket.io.js"></script>
+            <script src="Client/Scripts/Core/Libraries/Momentum.js"></script>
+            <script src="Client/Scripts/Core/Libraries/gl-mat-min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/opentype.js@latest/dist/opentype.min.js"></script>
+            <script src="https://unpkg.com/earcut@2.1.1/dist/earcut.dev.js"></script>
+
+            <!-- Utils -->
+            <script src="Client/Scripts/Core/Util/FontManager.js"></script>
+            <script src="Client/Scripts/Core/Util/Time.js"></script>
+            
+            <!-- Game -->
+            <script src="Client/Scripts/Core/Game/Game.js"></script>
+            
+            <!-- Client Main -->
+            <script src="Client/Scripts/Main.js"></script>
+        </div>
+    </body>
+</html>
