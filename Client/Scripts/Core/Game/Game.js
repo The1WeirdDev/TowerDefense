@@ -1,6 +1,13 @@
 class Game {
-    static Init() {
+    static player = null;
 
+    static Init() {
+    }
+
+    static CreatePlayer(user_id, username) {
+        Game.player = new Player();
+        Game.player.user_data.user_id = user_id;
+        Game.player.username = username;
     }
 
     static Update() {

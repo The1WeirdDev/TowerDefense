@@ -65,7 +65,7 @@ class Shader {
         );
     }
 
-    LoadFloat(location, value){ 
+    LoadFloat(location, value) {
         gl.uniform1f(
             location,
             value
@@ -86,6 +86,16 @@ class Shader {
             vec3.x,
             vec3.y,
             vec3.z
+        );
+    }
+
+    LoadVector4(location, vec4) {
+        gl.uniform4f(
+            location,
+            vec4.x,
+            vec4.y,
+            vec4.z,
+            vec4.w
         );
     }
 

@@ -12,7 +12,7 @@ class NetworkHandler {
         setInterval(NetworkHandler.Tick, 1000 / NetworkHandler.tick_rate);
     }
 
-    static ConnectToServer(address, username) {
+    static ConnectToServer(address) {
         NetworkHandler.server_address = address;
 
         NetworkHandler.server_socket = io(address);
@@ -20,9 +20,9 @@ class NetworkHandler {
         NetworkHandler.server_socket.on("connect", NetworkHandler.OnConnect);
         NetworkHandler.server_socket.on("disconnect", NetworkHandler.OnDisconnect);
 
-        NetworkHandler.server_socket.on(PacketTypes.get_username, (data) => {
-            console.log("Other P " + data)
-        });
+        NetworkHandler.server_socket.on(PacketTypes.get_player_data, (data) => {
+            NetworkHandler.OnGetPlayerData(data);
+        })
 
         /*
         NetworkHandler.server_socket.on("set_block", NetworkHandler.onSetBlock);
@@ -56,8 +56,6 @@ class NetworkHandler {
 
         //NetworkPlayerHandler.cleanUp();
         //NetworkPlayerHandler.Players = [];
-
-        NetworkHandler.AddPacketToQue("SetUsername", username);
     }
 
     static Tick() {
@@ -70,6 +68,7 @@ class NetworkHandler {
 
     static CleanUp() {
         NetworkHandler.Disconnect();
+
         this.server_socket = null;
         this.server_address = null;
     }
@@ -100,10 +99,16 @@ class NetworkHandler {
         //NetworkHandler.getPlayers();
         LobbyScreen.Init();
         ScreenHandler.current_screen_to_handle = LobbyScreen;
+        NetworkHandler.SendPacket(PacketTypes.get_player_data);
     }
 
     static OnDisconnect() {
         NetworkHandler.is_connected = false;
         console.log("Disconnected from server");
+    }
+
+    static OnGetPlayerData(data) {
+        Game.CreatePlayer(data[0], data[1]);
+        LobbyScreen.user_id_label.SetText(data[1]);
     }
 }

@@ -4,10 +4,12 @@
 }
 html,
 body {
+    min-width:600px;
     width: 100%;
     height: 100%;
 }
 canvas {
     display: block;
+    
     z-index: 0;
 }

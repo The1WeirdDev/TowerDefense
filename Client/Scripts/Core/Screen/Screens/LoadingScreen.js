@@ -2,8 +2,7 @@ class LoadingScreen {
     static text_label = null;
 
     static Init() {
-        LoadingScreen.text_label = new TextLabel(150, false, "Loading ...");
-        LoadingScreen.text_label.transform.position = new Vector2(-8, -4);
+        LoadingScreen.text_label = new TextLabel(-8, -4, 4, 2, 150, false, "Loading ...");
     }
     static Update() { }
     static Draw() {

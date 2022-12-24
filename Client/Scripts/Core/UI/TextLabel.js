@@ -1,61 +1,47 @@
-class TextLabel extends UI {
-    transform;
-
-    text = null;
-    font_size = null;
-
-    mesh = null;
-    color = null;
+class TextLabel extends Frame {
+    text = "";
+    text_color = null;
+    text_mesh = null;
+    text_offset = null;
+    text_scale = null;
+    font_size = 75;
     centered = false;
 
-    constructor(font_size, centered, text) {
-        super();
+    constructor(x, y, width, height, font_size, centered, text) {
+        super(x, y, width, height, new Vector4(1.0, 0.0, 0.0, 1.0));
 
-        this.font_size = font_size;
-        this.text = text;
-        this.transform = new Transform2D();
-
-        this.transform.scale.x = (10.0 / 1920.0);
-        this.transform.scale.y = (-10.0 / 1920.0);
+        this.text_mesh = new BasicMesh();
+        this.text_color = new Vector4(1.0, 1.0, 1.0, 1.0);
+        this.text_scale = new Vector2(1.0, 1.0);
+        this.text_offset = new Vector2(0, 0);
 
         this.centered = centered;
-        this.color = new Vector3(1, 1, 1);
 
-        var data = TextMeshGenerator.CreateMeshData(FontManager.font_roboto, this.font_size, this.text, this.centered);
-        this.mesh = new BasicMesh();
-        this.mesh.CreateMesh([data[0], data[1], gl.DYNAMIC_DRAW]);
+        if (font_size) this.font_size = font_size;
+
+        if (text) this.SetText(text);
+
     }
 
     SetText(text) {
-        //this.CleanUp();
-
         this.text = text;
-        this.RegenerateMesh();
-    }
 
-    SetFontSize(font_size) {
-        this.CleanUp();
-
-        this.font_size = font_size;
-        this.RegenerateMesh();
-    }
-
-    RegenerateMesh() {
-        //this.mesh = ShapeMeshGenerator.CreateBoxMesh(1, 1);
         var mesh_data = TextMeshGenerator.CreateMeshData(FontManager.font_roboto, this.font_size, this.text, this.centered);
-        this.mesh.RemakeVertices(mesh_data[0]);
-        this.mesh.RemakeIndices(mesh_data[1]);
+        if (this.text_mesh.is_mesh_generated) {
+            this.text_mesh.RemakeVertices(mesh_data[0]);
+            this.text_mesh.RemakeIndices(mesh_data[1]);
+        } else {
+            this.text_mesh.CreateMesh([mesh_data[0], mesh_data[1]]);
+        }
     }
 
-    Draw() {
-        if (this.mesh)
-            this.mesh.Draw();
+
+    DrawText() {
+        this.Draw();
     }
 
     CleanUp() {
-        if (this.mesh) {
-            this.mesh.CleanUp();
-            this.mesh = null;
-        }
+        this.text_mesh.CleanUp();
+        this.frame_mesh.CleanUp();
     }
 }

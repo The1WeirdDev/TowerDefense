@@ -9,8 +9,11 @@ const io_server = socket_io(server);
 
 const port = 8080;
 
+const NOT_FOUND = "<html><h1>error 404 page not found</h1></html>";
+
 //Classes
 const NetworkHandler = require("./Networking/NetworkHandler.js");
+const SaveHandler = require("./Save/SaveHandler.js");
 
 app.get("*", (req, res) => {
     let newUrl = req.url;
@@ -24,11 +27,14 @@ app.get("*", (req, res) => {
         type = "text/javascript";
     }
 
+    if ((newUrl.startsWith("Client") || newUrl.startsWith("Shared")) == false)
+        newUrl = "random_location";
+
     const headers = { "Content-Type": type };
     fs.readFile(newUrl, function(error, data) {
         if (error) {
             res.writeHead(404, headers);
-            res.write("<html><h1>error 404 page not found</h1></html>");
+            res.write(NOT_FOUND);
         } else {
             res.writeHead(200, headers);
             res.write(data);
@@ -46,4 +52,9 @@ server.listen(port, (error, data) => {
         console.log(`Server started on port ${port}.`);
 })
 
-NetworkHandler.Init(io_server);
+function Init() {
+    NetworkHandler.Init(io_server);
+    SaveHandler.LoadPlayerData();
+}
+
+Init();

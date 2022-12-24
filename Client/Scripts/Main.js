@@ -10,10 +10,8 @@ canvas.addEventListener("mousedown", (e) => { GameHandler.OnMouseButtonDown(e); 
 canvas.addEventListener("mousemove", (e) => { GameHandler.OnMouseMove(e); });
 */
 
-var mouse_position = new Vector2(0, 0);
-var mouse_buttons = [];
-
 var shader = null;
+var resize_check = true;
 
 function Start() {
     //Loading fonts then Starting the game
@@ -32,6 +30,7 @@ function Init() {
     ScreenHandler.Init();
     //MenuHandler.Init();
     Time.Init();
+    Mouse.Init();
 
     shader = new ShapeTexturelessShader();
 
@@ -48,22 +47,15 @@ function Init() {
 }
 
 function AddListeners() {
-    Display.canvas.addEventListener("mouseup", (e) => {
-        mouse_buttons[e.button] = 0;
-    });
-    Display.canvas.addEventListener("mousedown", (e) => {
-        mouse_buttons[e.button] = 1;
-    });
-
-    Display.canvas.addEventListener("mousemove", (e) => {
-        const rect = Display.canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        let _x = (x / rect.width) * 2 - 1;
-        let _y = (y / rect.height) * -2 + 1;
-        mouse_position.x = _x * 10;
-        mouse_position.y = _y * (10 / Display.GetAspectRatio());
+    window.addEventListener("resize", () => {
+        if (resize_check) {
+            Display.OnResized();
+            resize_check = false;
+            setTimeout(function() {
+                resize_check = true;
+                Display.OnResized();
+            }, 500)
+        }
     });
 }
 

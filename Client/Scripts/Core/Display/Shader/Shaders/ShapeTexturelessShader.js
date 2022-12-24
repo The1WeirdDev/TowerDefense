@@ -16,10 +16,10 @@ class ShapeTexturelessShader extends Shader {
     static fragment_data = `
         precision mediump float;
         
-        uniform vec3 color;
+        uniform vec4 color;
         
         void main() {
-            gl_FragColor = vec4(color, 1);
+            gl_FragColor = vec4(color);
         }
     `;
 

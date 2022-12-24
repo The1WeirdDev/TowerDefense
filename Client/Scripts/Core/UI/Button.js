@@ -1,131 +1,43 @@
 class Button extends Frame {
+    text = "";
+    text_color = null;
+    text_mesh = null;
+    text_offset = null;
+    text_scale = null;
+    font_size = 75;
 
-    //Mouse button to trigger
-    button = 0;
-    z_index = -0.1;
-    text_label = null;
+    constructor(x, y, width, height) {
+        super(x, y, width, height, new Vector4(0, 0, 1, 1));
 
-    constructor(x, y, width, height, text) {
-        super(x, y, width, height, new Vector3(0.5, 0.5, 0.5));
-
-        this.text_label = new TextLabel(50, true, text);
-
-        UI.buttons.push(this);
+        this.text_color = new Vector4(1.0, 1.0, 1.0, 1.0);
+        this.text_scale = new Vector2(1.0, 1.0);
+        this.text_offset = new Vector2(1, 1);
     }
 
     SetText(text) {
-        this.text_label.SetText(text);
+        this.text = text;
+
+        var mesh_data = TextMeshGenerator.CreateMeshData(FontManager.font_roboto, this.font_size, this.text, true);
+        if (this.text_mesh) {
+            this.text_mesh.RemakeVertices(mesh_data[0]);
+            this.text_mesh.RemakeIndices(mesh_data[1]);
+        } else {
+            this.text_mesh = new BasicMesh();
+            this.text_mesh.CreateMesh([mesh_data[0], mesh_data[1]]);
+        }
     }
 
     CleanUp() {
-        if (this.text_label)
-            this.text_label.CleanUp();
+        if (this.text_mesh)
+            this.text_mesh.CleanUp();
 
-        this.mesh.CleanUp();
-        this.mesh = null;
+        this.frame_mesh.CleanUp();
     }
 
     IsHeld(mouse_x, mouse_y, button) {
-        var mouse_to_rel_x = mouse_x;
-        var mouse_to_rel_y = mouse_y;
-
-        if (mouse_to_rel_x >= this.position.x && mouse_to_rel_x <= this.position.x + this.scale.x && mouse_to_rel_y >= this.position.y && mouse_to_rel_y <= this.position.y + this.scale.y && button)
-            return true;
-        else
-            return false;
-    }
-
-    IsPressed() {
-        var mouse_to_rel_x = mouse_x / Display.width;
-        var mouse_to_rel_y = mouse_y / Display.height;
-
-        if (mouse_to_rel_x >= this.x && mouse_to_rel_x <= this.x + this.width && mouse_to_rel_y >= this.y && mouse_to_rel_y <= this.y + this.height && button)
+        if (mouse_x > this.transform.position.x && mouse_x < this.transform.position.x + this.transform.scale.x && mouse_y > this.transform.position.y && mouse_y < this.transform.position.y + this.transform.scale.y && button)
             return true;
         else
             return false;
     }
 }
-/*
-    s Button extends UI {
-    position = null;
-    scale = null;
-    
-    transform = null;
-    mesh = null;
-    
-    color = null;
-    
-    //Mouse button to trigger
-    button = 0;
-    z_index = -0.1;
-    text_label = null;
-    
-        tructor(x, y, width, height, text) {
-        super();
-        
-        this.color = new Vector3(0, 1, 0);
-        this.position = new Vector2(x, y);
-        this.scale = new Vector2(width, height);
-        
-        this.transform = new Transform2D();
-        
-        this.mesh = new BasicMesh();
-        this.mesh.CreateMesh([[x, y, x, y + height, x + width, y, x + width, y + height], [0, 1, 2, 2, 1, 3]]);
-        
-        this.text_label = new TextLabel(50, true, text);
-        
-        UI.buttons.push(this);
-    }
-    
-        ext(text) {
-        this.text_label.SetText(text);
-    }
-    
-        nerateMesh() {
-            this.mesh)
-            this.mesh.SubVertices([0, 0, 0, y, x, 0, x, y]);
-    }
-    
-        () {
-            this.mesh)
-            this.mesh.Draw();
-    }
-    
-        nUp() {
-            this.text_label)
-            this.text_label.CleanUp();
-        
-        this.mesh.CleanUp();
-        this.mesh = null;
-    }
-    
-        vered(mouse_x, mouse_y) {
-        var mouse_to_rel_x = mouse_x;
-        var mouse_to_rel_y = mouse_y;
-        
-            mouse_to_rel_x >= this.position.x && mouse_to_rel_x <= this.position.x + this.scale.x && mouse_to_rel_y >= this.position.y && mouse_to_rel_y <= this.position.y + this.scale.y)
-            return true;
-            
-            return false;
-    }
-    
-        ld(mouse_x, mouse_y, button) {
-        var mouse_to_rel_x = mouse_x;
-        var mouse_to_rel_y = mouse_y;
-        
-            mouse_to_rel_x >= this.position.x && mouse_to_rel_x <= this.position.x + this.scale.x && mouse_to_rel_y >= this.position.y && mouse_to_rel_y <= this.position.y + this.scale.y && button)
-            return true;
-            
-            return false;
-    }
-    
-        essed() {
-        var mouse_to_rel_x = mouse_x / Display.width;
-        var mouse_to_rel_y = mouse_y / Display.height;
-        
-            mouse_to_rel_x >= this.x && mouse_to_rel_x <= this.x + this.width && mouse_to_rel_y >= this.y && mouse_to_rel_y <= this.y + this.height && button)
-            return true;
-            
-            return false;
-    }
-}*/

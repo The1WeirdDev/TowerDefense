@@ -8,7 +8,6 @@ class BasicMesh extends Mesh {
         const index_data = data[1];
         var draw_type = data[2];
 
-
         if (vertex_data == null || index_data == null) {
             console.log("Null Vertex or Index data for creating mesh. Stopping progress.");
             return;
@@ -94,6 +93,9 @@ class BasicMesh extends Mesh {
     }
 
     CleanUp() {
+        if (this.is_mesh_generated == false)
+            return;
+
         gl.bindBuffer(gl.ARRAY_BUFFER, null);
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
         gl.bindVertexArray(null);
@@ -101,6 +103,28 @@ class BasicMesh extends Mesh {
         gl.deleteBuffer(this.vbo_id);
         gl.deleteBuffer(this.ebo_id);
         gl.deleteVertexArray(this.vao_id);
+
+        this.is_mesh_generated = false;
+    }
+
+    SubVertices(vertices) {
+        gl.bindVertexArray(this.vao_id);
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo_id);
+        
+        gl.bufferSubData(gl.ARRAY_BUFFER, 0, vertices);
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, null);
+        gl.bindVertexArray(null);
+    }
+    
+    SubIndices(indices) {
+        gl.bindVertexArray(this.vao_id);
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.ebo_id);
+        
+        gl.bufferSubData(gl.ELEMENT_ARRAY_BUFFER, 0, indices);
+
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+        gl.bindVertexArray(null);
     }
 
     RemakeVertices(vertices) {

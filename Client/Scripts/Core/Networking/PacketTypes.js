@@ -1,3 +1,3 @@
 class PacketTypes {
-    static get_username = "get_username";
+    static get_player_data = "get_player_data";
 }

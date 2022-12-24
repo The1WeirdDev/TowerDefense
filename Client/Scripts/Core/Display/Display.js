@@ -9,12 +9,13 @@ class Display {
     static Init() {
         Display.canvas = document.getElementById("game_canvas");
         gl = Display.canvas.getContext("webgl2", { premultipliedAlpha: true, antialias: true });
-        Display.width = innerWidth;
-        Display.height = innerHeight;
+
+        document.body.style.background = "black";
+
+        Display.OnResized();
+        Display.background_color = new Vector3(0.0, 0.0, 0.0);
 
         gl.sampleCoverage(2.0, false);
-
-        Display.background_color = new Vector3(0.0, 0.0, 0.0);
 
         gl.enable(gl.BLEND);
         gl.enable(gl.DEPTH_TEST);
@@ -22,12 +23,6 @@ class Display {
     }
 
     static Update() {
-        Display.canvas.width = innerWidth;
-        Display.canvas.height = innerHeight;
-
-        Display.width = innerWidth;
-        Display.height = innerHeight;
-
         //For some reason if the color is in rgb order it shows it in rbg
         //So now the order is going to be rbg instead
 
@@ -36,6 +31,21 @@ class Display {
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
         gl.clearColor(Display.background_color.x, Display.background_color.z, Display.background_color.y, 1);
         gl.viewport(0, 0, Display.canvas.width, Display.canvas.height);
+    }
+
+    static OnResized() {
+        Display.height = innerHeight;
+        Display.width = Display.height * (16 / 9);
+
+        Display.canvas.width = Display.width;
+        Display.canvas.height = Display.height;
+
+        Display.canvas.style.position = "absolute";
+
+        if (innerWidth - Display.width > 0)
+            Display.canvas.style.left = ((innerWidth - Display.width) / 2) + "px";
+        else
+            Display.canvas.style.left = "0px";
     }
 
     static GetAspectRatio() {

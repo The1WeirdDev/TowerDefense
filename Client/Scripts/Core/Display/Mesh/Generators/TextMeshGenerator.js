@@ -85,16 +85,28 @@ class TextMeshGenerator {
 
         root.forEach(process);
 
+        var vertices = [];
         if (centered) {
-            var vertices = [];
             for (var i = 0; i < vertexData.length; i++) {
                 if (i % 2 == 0)
                     vertices[i] = vertexData[i] - longest_x / 2;
                 else
                     vertices[i] = vertexData[i] - longest_y / 2;
             }
-            vertexData = vertices;
+        } else {
+            for (var i = 0; i < vertexData.length; i++) {
+                vertices[i] = vertexData[i];
+            }
         }
+
+        for (var i = 0; i < vertexData.length; i++) {
+            if (i % 2 == 0)
+                vertices[i] = vertices[i] * 0.00520833333;
+            else
+                vertices[i] = vertices[i] * -0.00520833333;
+        }
+
+        vertexData = vertices;
 
         const indexData = new Uint16Array(indices);
         return [vertexData, indexData];
