@@ -27,10 +27,10 @@ function Start() {
 
 function Init() {
     Display.Init();
-    ScreenHandler.Init();
-    //MenuHandler.Init();
     Time.Init();
     Mouse.Init();
+    Keyboard.Init();
+    ScreenHandler.Init();
 
     shader = new ShapeTexturelessShader();
 
@@ -38,19 +38,21 @@ function Init() {
     ShaderManager.text_label_shader.Start();
     ShaderManager.text_label_shader.LoadMatrix4(ShaderManager.text_label_shader_projection_matrix_location, ortho_matrix);
     ShaderManager.text_label_shader.LoadVector2(ShaderManager.text_label_shader_scale_location, text_label.scale);
-    ShaderManager.text_label_shader.Stop();
+    ShaderManager.text_label_hader.Stop();
     */
 
     AddListeners();
-
     setInterval(Update, 1000 / 60);
+
 }
 
 function AddListeners() {
     window.addEventListener("resize", () => {
         if (resize_check) {
+
             Display.OnResized();
             resize_check = false;
+
             setTimeout(function() {
                 resize_check = true;
                 Display.OnResized();
@@ -60,11 +62,12 @@ function AddListeners() {
 }
 
 function Update() {
-    Time.Update();
     Display.Update();
+    Time.Update();
+    Mouse.Update();
+    Keyboard.Update();
+    UI.Update();
     ScreenHandler.Update();
-
-    //button1.transform.position.x += Time.delta_time * 0.25;
 
     Draw();
 }
@@ -77,12 +80,6 @@ function Draw() {
     shader.Stop();
 
     ScreenHandler.Draw();
-
-    //var fps = Math.floor(Time.GetFps());
-
-    //UIRenderer.RenderTextLabel(text_label);
-
-    //MenuHandler.Draw();
 }
 
 function CleanUp() {

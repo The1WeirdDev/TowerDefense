@@ -20,7 +20,7 @@ class UIRenderer {
         if (button.text_mesh) {
             shader.LoadFloat(shader.z_index_location, button.z_index);
             shader.LoadVector4(shader.color_location, button.text_color);
-            shader.LoadMatrix4(shader.transformation_matrix_location, MatrixHandler.CreateTransformationMatrix(Vector2.Add(button.transform.position, button.text_offset), button.transform.text_scale));
+            shader.LoadMatrix4(shader.transformation_matrix_location, MatrixHandler.CreateTransformationMatrix([Vector2.Add(button.transform.position, button.text_offset), button.text_scale]));
 
             button.text_mesh.Draw();
         }

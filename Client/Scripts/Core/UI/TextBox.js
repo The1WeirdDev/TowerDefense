@@ -9,7 +9,7 @@ class TextBox extends Frame {
     centered = false;
 
     constructor(x, y, width, height, font_size, centered, text) {
-        super(x, y, width, height, new Vector4(1.0, 0.0, 0.0, 1.0));
+        super(x, y, width, height, new Vector4(0.75, 0.75, 0.75, 1.0));
 
         this.text_mesh = new BasicMesh();
         this.text_color = new Vector4(1.0, 1.0, 1.0, 1.0);
@@ -21,7 +21,9 @@ class TextBox extends Frame {
         if (font_size) this.font_size = font_size;
 
         if (text) this.SetText(text);
-
+        UI.text_boxes.push(this);
+        this.initialized = true;
+        this.type = UI.types.TextBox;
     }
 
     AddCharacter(letter) {
@@ -55,5 +57,14 @@ class TextBox extends Frame {
     CleanUp() {
         this.text_mesh.CleanUp();
         this.frame_mesh.CleanUp();
+
+        UI.text_boxes.splice(UI.text_boxes.indexOf(this), 1);
+    }
+
+    IsHovered() {
+        if (Mouse.mouse_position.x >= this.transform.position.x && Mouse.mouse_position.x <= this.transform.position.x + this.transform.scale.x && Mouse.mouse_position.y >= this.transform.position.y && Mouse.mouse_position.y <= this.transform.position.y + this.transform.scale.y)
+            return true;
+        else
+            return false;
     }
 }

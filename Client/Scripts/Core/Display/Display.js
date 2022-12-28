@@ -5,6 +5,8 @@ class Display {
     static height = 0;
 
     static background_color = null;
+    static elem = document.documentElement;
+    static fullscreen = false;
 
     static Init() {
         Display.canvas = document.getElementById("game_canvas");
@@ -56,5 +58,43 @@ class Display {
         Display.background_color.x = r;
         Display.background_color.y = b;
         Display.background_color.z = g;
+    }
+
+    //I used this fullscreen code from stackoverflow
+    //For some reason the try/catch loops arent working
+    /* View in fullscreen */
+    static OpenFullscreen() {
+        try{
+        if (Display.elem.requestFullscreen) {
+            Display.fullscreen = true;
+            Display.elem.requestFullscreen();
+        } else if (Display.elem.webkitRequestFullscreen) { /* Safari */
+            Display.fullscreen = true;
+            Display.elem.webkitRequestFullscreen();
+        } else if (Display.elem.msRequestFullscreen) { /* IE11 */
+            Display.fullscreen = true;
+            Display.elem.msRequestFullscreen();
+        }
+        }catch(e){
+            console.log("Failed Opening Fullscreen.");
+        }
+    }
+
+    /* Close fullscreen */
+    static CloseFullscreen() {
+        try {
+            if (document.exitFullscreen) {
+                Display.fullscreen = false;
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) { /* Safari */
+                Display.fullscreen = false;
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) { /* IE11 */
+                Display.fullscreen = false;
+                document.msExitFullscreen();
+            }
+        } catch (e) {
+            console.log("Closing Fullscreen Failed.");
+        }
     }
 }

@@ -32,7 +32,7 @@ class MatrixHandler {
                 glMatrix.mat4.translate(matrix, matrix, [
                     object[0].x,
                     object[0].y,
-                    -0.1
+                    0
                 ]);
 
                 glMatrix.mat4.scale(matrix, matrix, [

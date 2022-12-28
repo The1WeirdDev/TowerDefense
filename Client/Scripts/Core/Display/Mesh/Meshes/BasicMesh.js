@@ -110,17 +110,17 @@ class BasicMesh extends Mesh {
     SubVertices(vertices) {
         gl.bindVertexArray(this.vao_id);
         gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo_id);
-        
+
         gl.bufferSubData(gl.ARRAY_BUFFER, 0, vertices);
 
         gl.bindBuffer(gl.ARRAY_BUFFER, null);
         gl.bindVertexArray(null);
     }
-    
+
     SubIndices(indices) {
         gl.bindVertexArray(this.vao_id);
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.ebo_id);
-        
+
         gl.bufferSubData(gl.ELEMENT_ARRAY_BUFFER, 0, indices);
 
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
