@@ -25,7 +25,7 @@ class Party {
         }
 
         this.id = id_s;
-        OutputHandler.log(this.id);
+        OutputHandler.Log(this.id);
     }
 
     SetHost(player) {
@@ -62,7 +62,7 @@ class Party {
                 NetworkHandler.SendPacket(player.socket, PacketTypes.party_join_response, { outcome: "Fail", reason: "Party Full" });
             }
         } catch (e) {
-            OutputHandler.log(e);
+            OutputHandler.Log(e);
         }
     }
 

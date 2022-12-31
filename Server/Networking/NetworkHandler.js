@@ -70,7 +70,7 @@ module.exports = class NetworkHandler {
     }
 
     static OnConnected(player) {
-        const ip = player.socket.handshake.headers['x-forwarded-for'].split(",")[0];
+        //const ip = player.socket.handshake.headers['x-forwarded-for'].split(",")[0];
         OutputHandler.Log(`${player.username} Connected.`);
     }
 
