@@ -1,10 +1,13 @@
-const { v4: uuidv4 } = require('uuid');
+//const { v4: uuidv4 } = require('uuid');
 
 module.exports = class Player {
     socket = null;
     socket_id = null;
+
     user_id = null;
     username = null;
+
+    party = null;
 
     constructor(socket) {
         this.socket = socket;

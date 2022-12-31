@@ -3,6 +3,9 @@ window.onload = Start;
 window.onbeforeunload = CleanUp;
 
 /*
+
+            */
+/*
 canvas.addEventListener("keyup", (e) => { GameHandler.OnKeyUp(e); });
 canvas.addEventListener("keydown", (e) => { GameHandler.OnKeyDown(e); });
 canvas.addEventListener("mouseup", (e) => { GameHandler.OnMouseButtonUp(e); });
@@ -30,7 +33,7 @@ function Init() {
     Time.Init();
     Mouse.Init();
     Keyboard.Init();
-    ScreenHandler.Init();
+    GUIHandler.Init();
 
     shader = new ShapeTexturelessShader();
 
@@ -67,7 +70,7 @@ function Update() {
     Mouse.Update();
     Keyboard.Update();
     UI.Update();
-    ScreenHandler.Update();
+    GUIHandler.Update();
 
     Draw();
 }
@@ -79,13 +82,13 @@ function Draw() {
     shader.LoadMatrix4(shader.projection_matrix_location, ortho_matrix);
     shader.Stop();
 
-    ScreenHandler.Draw();
+    GUIHandler.Draw();
 }
 
 function CleanUp() {
     shader.CleanUp();
 
-    ScreenHandler.CleanUp();
+    GUIHandler.CleanUp();
     NetworkHandler.CleanUp();
 
     FontManager.CleanUp();

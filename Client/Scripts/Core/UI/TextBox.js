@@ -7,6 +7,7 @@ class TextBox extends Frame {
     font_size = 75;
     character_limit = 25;
     centered = false;
+    can_add_text = true;
 
     constructor(x, y, width, height, font_size, centered, text) {
         super(x, y, width, height, new Vector4(0.75, 0.75, 0.75, 1.0));
@@ -27,12 +28,12 @@ class TextBox extends Frame {
     }
 
     AddCharacter(letter) {
-        if (this.text.length + 1 <= this.character_limit)
+        if (this.text.length + 1 <= this.character_limit && this.can_add_text)
             this.SetText(this.text + letter);
     }
 
     RemoveCharacter() {
-        if (this.text.length >= 1) {
+        if (this.text.length >= 1 && this.can_add_text) {
             this.text = this.text.slice(0, -1);
             this.SetText(this.text);
         }

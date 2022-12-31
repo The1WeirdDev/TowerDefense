@@ -8,6 +8,7 @@
 
     <body>
         <div id="scripts">
+
             
             <!-- Display -->
             <script src="Client/Scripts/Core/Display/Display.js"></script>
@@ -20,11 +21,12 @@
             <!-- Renderers -->
             <script src="Client/Scripts/Core/Display/Renderers/UIRenderer.js"></script>
             
-            <!-- Screens -->
-            <script src="Client/Scripts/Core/Screen/ScreenHandler.js"></script>
-            <script src="Client/Scripts/Core/Screen/Screens/MainMenu.js"></script>
-            <script src="Client/Scripts/Core/Screen/Screens/LoadingScreen.js"></script>
-            <script src="Client/Scripts/Core/Screen/Screens/LobbyScreen.js"></script>
+            <!-- GUI -->
+            <script src="Client/Scripts/Core/GUI/GUIHandler.js"></script>
+            <script src="Client/Scripts/Core/GUI/GUIS/MainMenu.js"></script>
+            <script src="Client/Scripts/Core/GUI/GUIS/LoadingScreen.js"></script>
+            <script src="Client/Scripts/Core/GUI/GUIS/LobbyScreen.js"></script>
+            <script src="Client/Scripts/Core/GUI/GUIS/PartyScreen.js"></script>
             
             <!-- Mesh -->
             <script src="Client/Scripts/Core/Display/Mesh/Mesh.js"></script>
@@ -41,6 +43,7 @@
 
             <!-- Input -->
             <script src="Client/Scripts/Core/Input/Mouse.js"></script>
+            <script src="Client/Scripts/Core/Input/Key.js"></script>
             <script src="Client/Scripts/Core/Input/Keyboard.js"></script>
 
             <!-- Player -->
@@ -70,9 +73,9 @@
             <script src="Client/Scripts/Core/Networking/PacketTypes.js"></script>
             
             <!-- Libraries -->
-            <script src="socket.io/socket.io.js"></script>
             <script src="Client/Scripts/Core/Libraries/Momentum.js"></script>
             <script src="Client/Scripts/Core/Libraries/gl-mat-min.js"></script>
+            <script src="socket.io/socket.io.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/opentype.js@latest/dist/opentype.min.js"></script>
             <script src="https://unpkg.com/earcut@2.1.1/dist/earcut.dev.js"></script>
 
@@ -82,6 +85,7 @@
             
             <!-- Client Main -->
             <script src="Client/Scripts/Main.js"></script>
+            
         </div>
     </body>
 </html>

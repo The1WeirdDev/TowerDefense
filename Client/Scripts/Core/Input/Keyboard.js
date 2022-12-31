@@ -22,7 +22,7 @@ class Keyboard {
 
         //Checking if keys were pressed
         while (Keyboard.keys_pressed.length > 0) {
-            Keyboard.#keys[Keyboard.keys_pressed[0]] = 2;
+            Keyboard.#keys[Keyboard.keys_pressed[0].keycode] = 2;
 
             if (UI.focused_frame)
                 if (UI.focused_frame.on_key_pressed)
@@ -33,7 +33,7 @@ class Keyboard {
 
         //Checking if keys were released
         while (Keyboard.keys_released.length > 0) {
-            Keyboard.#keys[Keyboard.keys_released[0]] = 0;
+            Keyboard.#keys[Keyboard.keys_released[0].keycode] = 0;
             if (UI.focused_frame)
                 if (UI.focused_frame.on_key_released)
                     UI.focused_frame.on_key_released(Keyboard.keys_released[0]);
@@ -51,45 +51,57 @@ class Keyboard {
         return Keyboard.#keys[key.charCodeAt(0)] >= 1;
     }
 
+    /*
+        Currently special characters like !@#$%^&*() Are getting passes this
+        Sometime the keycode parameter is going to get replaced by the Key class instead
+        and get the key name from those instances
+    */
+
     static IsKeyCodeNum(keycode) {
-        if (keycode >= 47 && keycode <= 57)
+        //var key = String.fromCharCode(keycode);
+        var key = String.fromCharCode(keycode);
+        //if (keycode >= 47 && keycode <= 57)
+        if (/^[0-9]+$/.test(key))
             return true;
         else
             return false;
     }
 
     static IsKeyCodeAlpha(keycode) {
-        if (keycode >= 97 && keycode <= 122)
+        var key = String.fromCharCode(keycode);
+        if (/^[a-zA-Z]+$/.test(key))
             return true;
         else
             return false;
     }
 
     static IsKeyCodeAlphaNum(keycode) {
-        if ((keycode >= 48 && keycode <= 57) || (keycode >= 97 && keycode <= 122))
+        var key = String.fromCharCode(keycode);
+        if (/^[a-zA-Z0-9]+$/.test(key))
             return true;
         else
             return false;
     }
 
     static OnKeyUp(e) {
-        var key = e.key;
-        var keycode = key.charCodeAt(0);
+        var keycode = e.keyCode;
+        var key = String.fromCharCode(e.key);
 
-        Keyboard.keys_released.push(keycode);
+        Keyboard.keys_released.push(new Key(e.keyCode, e.key));
     }
     static OnKeyDown(e) {
         e.preventDefault();
-        var keycode = e.key.charCodeAt(0);
-
         if (e.repeat) return;
+
+        //var key = String.fromCharCode(e.keyCode);
 
         if (e.key == "F11") {
             if (Display.fullscreen == false)
                 Display.OpenFullscreen();
             else
                 Display.CloseFullscreen();
-        } else
-            Keyboard.keys_pressed.push(keycode);
+        } else {
+            Keyboard.keys_pressed.push(new Key(e.keyCode, e.key));
+        }
     }
 }

@@ -1,5 +1,7 @@
+const OutputHandler = require("./../Util/OutputHandler.js");
 const PacketTypes = require("./PacketTypes.js");
 const Player = require("./../Player/Player.js");
+const PartyManager = require("./../Party/PartyManager.js");
 
 module.exports = class NetworkHandler {
     static server = null;
@@ -9,7 +11,7 @@ module.exports = class NetworkHandler {
     static Init(server) {
         NetworkHandler.server = server;
 
-        server.on("connection", (socket) => {
+        server.on(PacketTypes.connect, (socket) => {
             //Creating Player Object
             const player = new Player(socket);
             NetworkHandler.players.push(player);
@@ -46,8 +48,20 @@ module.exports = class NetworkHandler {
     }
 
     static SetSocketPacketHandlers(player, socket) {
-        socket.on("disconnect", () => {
+        socket.on(PacketTypes.disconnect, () => {
             NetworkHandler.OnDisconnected(player);
+        });
+
+        socket.on(PacketTypes.party_create_request, (data) => {
+            NetworkHandler.OnPartyCreateRequest(player, data);
+        });
+
+        socket.on(PacketTypes.party_join_request, (data) => {
+            NetworkHandler.OnPartyJoinRequest(player, data);
+        });
+
+        socket.on(PacketTypes.party_leave_request, (data) => {
+            NetworkHandler.OnPartyLeaveRequest(player, data);
         });
 
         socket.on(PacketTypes.get_player_data, () => {
@@ -57,11 +71,28 @@ module.exports = class NetworkHandler {
 
     static OnConnected(player) {
         const ip = player.socket.handshake.headers['x-forwarded-for'].split(",")[0];
-        console.log(`${player.username} Connected.`);
+        OutputHandler.Log(`${player.username} Connected.`);
     }
 
     static OnDisconnected(player) {
-        console.log(`${player.username} Disconnected.`);
+        OutputHandler.Log(`${player.username} Disconnected.`);
+        PartyManager.LeaveParty(player);
+    }
+
+    static OnPartyCreateRequest(player, data) {
+        //The data send with the packet is useless for now
+        PartyManager.CreateParty(player);
+    }
+
+    static OnPartyJoinRequest(player, data) {
+        var id = data;
+
+        PartyManager.JoinParty(player, id);
+    }
+    static OnPartyLeaveRequest(player, data) {
+        var id = data;
+
+        PartyManager.JoinParty(player, id);
     }
 
     static OnGetUsername(player) {
