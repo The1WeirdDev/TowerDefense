@@ -4,7 +4,7 @@
   "description": "",
   "main": "Server/Server.js",
   "scripts": {
-    "test": "node Server/Server.js"
+    "start": "node Server/Server.js"
   },
   "keywords": [],
   "author": "",
