@@ -7,7 +7,7 @@ const app = express();
 const server = http.createServer(app);
 const io_server = socket_io(server);
 
-const port = 8080;
+const port = process.env.PORT || 8080;
 const NOT_FOUND = "<html><h1>error 404 page not found</h1></html>";
 
 //Classes
