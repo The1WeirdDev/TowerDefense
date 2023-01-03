@@ -17,10 +17,13 @@ class UI {
     };
 
     //All ui objects will have this
+    enabled = true;
+    visible = true;
     focused = false;
-    z_index = 0;
     transform = null;
     initialized = false;
+    rendered_last = false;
+    z_index = 0;
     type = 0;
 
     //Callbacks
@@ -36,6 +39,41 @@ class UI {
     Draw() { }
 
     static Update() {
+        if (Mouse.IsButtonPressed(0)) {
+            var highest_z_index = -1;
+            var focused_frame = null;
+
+            for (var i = 0; i < UI.uis.length; i++) {
+                var ui = UI.uis[i];
+                ui.focused = false;
+
+                if (ui.initialized && ui.enabled) {
+                    if(ui.rendered_last){
+                        if (ui.IsHovered()) {
+                            if (ui.z_index >= highest_z_index) {
+                                highest_z_index = ui.z_index;
+                                focused_frame = ui;
+                            }
+                        }
+                    }
+                }
+            }
+
+            UI.focused_frame = focused_frame;
+
+            if (UI.focused_frame) {
+                UI.focused_frame.focused = true;
+
+                if (UI.focused_frame.on_pressed)
+                    UI.focused_frame.on_pressed();
+            }
+        }
+
+        for (var i = 0; i < UI.uis.length; i++) {
+            UI.uis[i].rendered_last = false;
+        }
+
+        /*
         if (Mouse.IsButtonPressed(0)) {
             var highest_z_index = -1;
 
@@ -60,6 +98,7 @@ class UI {
                     UI.focused_frame.on_pressed();
             }
         }
+        */
     }
 
     IsHovered() { return false; }

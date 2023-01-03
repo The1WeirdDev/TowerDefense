@@ -64,6 +64,10 @@ module.exports = class NetworkHandler {
             NetworkHandler.OnPartyLeaveRequest(player, data);
         });
 
+        socket.on(PacketTypes.start_game, () => {
+            NetworkHandler.OnGameStarted(player);
+        });
+
         socket.on(PacketTypes.get_player_data, () => {
             NetworkHandler.OnGetUsername(player);
         });
@@ -92,7 +96,11 @@ module.exports = class NetworkHandler {
     static OnPartyLeaveRequest(player, data) {
         var id = data;
 
-        PartyManager.JoinParty(player, id);
+        PartyManager.LeaveParty(player, id);
+    }
+
+    static OnGameStarted(player){
+        PartyManager.StartGame(player);
     }
 
     static OnGetUsername(player) {

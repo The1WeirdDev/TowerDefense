@@ -1,4 +1,5 @@
 class Button extends Frame {
+    enabled = true;
     text = "";
     text_centered = true;
     text_color = null;
@@ -46,21 +47,21 @@ class Button extends Frame {
     }
 
     IsHeld(button) {
-        if (Mouse.mouse_position.x >= this.transform.position.x && Mouse.mouse_position.x <= this.transform.position.x + this.transform.scale.x && Mouse.mouse_position.y >= this.transform.position.y && Mouse.mouse_position.y <= this.transform.position.y + this.transform.scale.y && Mouse.mouse_buttons[button] != 0)
+        if (this.enabled && Mouse.mouse_position.x >= this.transform.position.x && Mouse.mouse_position.x <= this.transform.position.x + this.transform.scale.x && Mouse.mouse_position.y >= this.transform.position.y && Mouse.mouse_position.y <= this.transform.position.y + this.transform.scale.y && Mouse.mouse_buttons[button] != 0)
             return true;
         else
             return false;
     }
 
     IsHovered() {
-        if (Mouse.mouse_position.x >= this.transform.position.x && Mouse.mouse_position.x <= this.transform.position.x + this.transform.scale.x && Mouse.mouse_position.y >= this.transform.position.y && Mouse.mouse_position.y <= this.transform.position.y + this.transform.scale.y)
+        if (this.enabled && Mouse.mouse_position.x >= this.transform.position.x && Mouse.mouse_position.x <= this.transform.position.x + this.transform.scale.x && Mouse.mouse_position.y >= this.transform.position.y && Mouse.mouse_position.y <= this.transform.position.y + this.transform.scale.y)
             return true;
         else
             return false;
     }
 
     IsPressed(button) {
-        if (Mouse.mouse_position.x >= this.transform.position.x && Mouse.mouse_position.x <= this.transform.position.x + this.transform.scale.x && Mouse.mouse_position.y >= this.transform.position.y && Mouse.mouse_position.y <= this.transform.position.y + this.transform.scale.y && Mouse.mouse_buttons[button] == 2)
+        if (this.enabled && Mouse.mouse_position.x >= this.transform.position.x && Mouse.mouse_position.x <= this.transform.position.x + this.transform.scale.x && Mouse.mouse_position.y >= this.transform.position.y && Mouse.mouse_position.y <= this.transform.position.y + this.transform.scale.y && Mouse.mouse_buttons[button] == 2)
             return true;
         else
             return false;

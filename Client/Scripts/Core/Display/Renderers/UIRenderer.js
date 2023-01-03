@@ -1,5 +1,8 @@
 class UIRenderer {
     static DrawFrame(shader, frame) {
+        if(!frame.visible)
+            return;
+
         shader.Start();
         shader.LoadFloat(shader.z_index_location, frame.z_index);
         shader.LoadVector4(shader.color_location, frame.frame_color);
@@ -7,9 +10,14 @@ class UIRenderer {
 
         frame.Draw();
         shader.Stop();
+        
+        frame.rendered_last = true;
     }
 
     static DrawButton(shader, button) {
+        if(!button.visible)
+            return;
+
         shader.Start();
         shader.LoadFloat(shader.z_index_location, button.z_index - 0.0001);
         shader.LoadVector4(shader.color_location, button.frame_color);
@@ -26,9 +34,14 @@ class UIRenderer {
         }
 
         shader.Stop();
+        
+        button.rendered_last = true;
     }
 
     static DrawTextLabel(shader, text_label) {
+        if(!text_label.visible)
+            return;
+
         shader.Start();
 
         shader.LoadFloat(shader.z_index_location, text_label.z_index - 0.0001);
@@ -44,9 +57,14 @@ class UIRenderer {
         text_label.text_mesh.Draw();
 
         shader.Stop();
+
+        text_label.rendered_last = true;
     }
 
     static DrawTextBox(shader, text_box) {
+        if(!text_box.visible)
+            return;
+
         shader.Start();
 
         shader.LoadFloat(shader.z_index_location, text_box.z_index - 0.0001);
@@ -62,5 +80,7 @@ class UIRenderer {
         text_box.text_mesh.Draw();
 
         shader.Stop();
+        
+        text_box.rendered_last = true;
     }
 }

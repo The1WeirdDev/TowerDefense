@@ -3,6 +3,7 @@ class GUIHandler {
 
     static Init() {
         MainMenu.Init();
+        PlayerScreen.Init();
         LoadingScreen.Init();
 
         GUIHandler.AddGuiToHandle(MainMenu);
@@ -37,9 +38,10 @@ class GUIHandler {
     }
 
     static CleanUp() {
+        PlayerScreen.CleanUp();
         PartyScreen.CleanUp();
         LoadingScreen.CleanUp();
         LobbyScreen.CleanUp();
-        MenuHandler.CleanUp();
+        MainMenu.CleanUp();
     }
 }

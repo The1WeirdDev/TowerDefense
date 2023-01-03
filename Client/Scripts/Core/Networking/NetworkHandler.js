@@ -23,6 +23,11 @@ class NetworkHandler {
 
         NetworkHandler.server_socket.on(PacketTypes.party_create_response, NetworkHandler.OnPartyCreateResponse);
         NetworkHandler.server_socket.on(PacketTypes.party_join_response, NetworkHandler.OnPartyJoinResponse);
+        NetworkHandler.server_socket.on(PacketTypes.party_leave_response, NetworkHandler.OnPartyLeaveResponse);
+        
+        NetworkHandler.server_socket.on(PacketTypes.party_deleted, NetworkHandler.OnPartyDeleted);
+        NetworkHandler.server_socket.on(PacketTypes.party_set_status, NetworkHandler.OnSetPartyData);
+        NetworkHandler.server_socket.on(PacketTypes.start_game, NetworkHandler.OnGameStarted);
 
         NetworkHandler.server_socket.on(PacketTypes.get_player_data, NetworkHandler.OnGetPlayerData);
     }
@@ -81,7 +86,7 @@ class NetworkHandler {
 
         //NetworkHandler.getPlayers();
         LobbyScreen.Init();
-        GUIHandler.SetGuiToHandle(LobbyScreen);
+        GUIHandler.SetGuisToHandle([LobbyScreen, PlayerScreen]);
         NetworkHandler.SendPacket(PacketTypes.get_player_data);
     }
 
@@ -100,25 +105,58 @@ class NetworkHandler {
     }
 
     static OnPartyCreateResponse(data) {
-        console.log(data);
+        const outcome = data.outcome;
+
+        //The only outcome so far is success
+        if(outcome == "Success"){
+            PartyScreen.Init();
+            GUIHandler.SetGuisToHandle([PartyScreen, PlayerScreen]);
+            console.log("Successfully created party");
+        }
     }
 
     static OnPartyJoinResponse(data) {
         const outcome = data.outcome;
 
+        LobbyScreen.text_box.can_add_text = true;
+        LobbyScreen.text_box.SetText("");
+
         if (outcome == "Fail") {
-            LobbyScreen.text_box.can_add_text = true;
             console.log("Failed to join party. Reason : " + data.reason);
         }
         else if (outcome == "Success") {
             PartyScreen.Init();
-            GUIHandler.SetGuiToHandle(PartyScreen);
+            GUIHandler.SetGuisToHandle([PartyScreen, PlayerScreen]);
             console.log("Successfully joined party");
         }
     }
 
+    static OnPartyLeaveResponse(data){
+        var outcome = data.outcome;
+
+        if(outcome == "Success"){
+            GUIHandler.SetGuisToHandle([LobbyScreen, PlayerScreen]);
+            console.log("Party was deleted");
+        }
+    }
+
+    static OnPartyDeleted(data){
+        GUIHandler.SetGuisToHandle([LobbyScreen, PlayerScreen]);
+        console.log("Successfully left the party");
+    }
+
     static OnGetPlayerData(data) {
         Game.CreatePlayer(data[0], data[1]);
-        LobbyScreen.user_id_label.SetText(data[1]);
+        PlayerScreen.user_id_label.SetText(data[1]);
+    }
+
+    static OnSetPartyData(data){
+        PartyScreen.OnSetPartyData(data);
+    }
+
+    static OnGameStarted(data){
+        console.log("Starting Game");
+        PartyScreen.start_game_button.enabled = true;
+        PartyScreen.leave_party_button.enabled = true;
     }
 }

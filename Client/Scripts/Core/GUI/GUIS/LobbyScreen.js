@@ -1,16 +1,12 @@
 class LobbyScreen {
     static is_initialized = false;
 
-    static user_id_label = null;
     static background_frame = null;
     static text_box = null;
     static join_party_button = null;
     static create_party_button = null;
 
     static Init() {
-        LobbyScreen.user_id_label = new TextLabel(-9.5, 4.5, 2.125, 0.35, 75, false, "Getting Player Username");
-        LobbyScreen.user_id_label.SetFrameTransparency(1.0);
-
         LobbyScreen.background_frame = new Frame(-5, -4, 10, 8, new Vector3(1, 0, 0));
 
         //Creating Create Party Button
@@ -42,7 +38,6 @@ class LobbyScreen {
 
     static Draw() {
         //UIRenderer.DrawFrame(shader, LobbyScreen.background_frame);
-        UIRenderer.DrawTextLabel(shader, LobbyScreen.user_id_label);
         UIRenderer.DrawButton(shader, LobbyScreen.join_party_button);
         UIRenderer.DrawButton(shader, LobbyScreen.create_party_button);
         UIRenderer.DrawTextBox(shader, LobbyScreen.text_box);
@@ -56,7 +51,6 @@ class LobbyScreen {
             LobbyScreen.join_party_button.CleanUp();
             LobbyScreen.text_box.CleanUp();
             LobbyScreen.background_frame.CleanUp();
-            LobbyScreen.user_id_label.CleanUp();
         }
     }
 

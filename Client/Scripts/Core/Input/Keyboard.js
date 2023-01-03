@@ -18,6 +18,13 @@ class Keyboard {
             if (Keyboard.#keys[i] == 2) {
                 Keyboard.#keys[i] = 1;
             }
+
+            /*
+            if(Keyboard.#keys[32] == 1){
+                clearInterval(update_interval);
+                CleanUp();
+            }
+            */
         }
 
         //Checking if keys were pressed

@@ -1,6 +1,6 @@
 module.exports = class OutputHandler {
     static GetDateAsString(date) {
-        return date.getFullYear().toString() + "/" + date.getMonth().toString() + "/" + date.getDate().toString();
+        return  (date.getMonth() + 1).toString() + "/" + date.getDate().toString() + "/" + date.getFullYear().toString();
     }
 
     static GetTimeAsString(date) {
@@ -8,7 +8,6 @@ module.exports = class OutputHandler {
         var hour = date.getHours();
 
         if (hour > 12) {
-            //hour -= 12;
             am_or_pm = "PM";
         }
 

@@ -4,12 +4,14 @@ const OutputHandler = require("./../Util/OutputHandler.js");
     unless they are defined inside of each instance
 */
 class Party {
+    static id_length = 6;
+
     max_players = 6;
     id = null;
     host = null;
     players = [];
 
-    static valid_characters = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz123456789";
+    static valid_characters = "123456789";
 
     constructor() {
         this.GeneratePartyID();
@@ -19,7 +21,7 @@ class Party {
 
     GeneratePartyID() {
         var id_s = "";
-        for (var i = 0; i < 6; i++) {
+        for (var i = 0; i < Party.id_length; i++) {
             var r_num = Math.floor(Math.random() * (Party.valid_characters.length - 1));
             id_s += Party.valid_characters[r_num];
         }
@@ -28,9 +30,60 @@ class Party {
         OutputHandler.Log(this.id);
     }
 
+    Broadcast(player, type, data){
+        const NetworkHandler = require("./../Networking/NetworkHandler.js");
+
+        if(this.host != null){
+            if(this.host.user_id != player.user_id)
+                NetworkHandler.SendPacket(this.host.socket, type, data);
+        }
+
+        for(var i = 0;i < this.players.length; i++){
+            var plr = this.players[i];
+
+            if(plr != null)
+                if(plr.user_id != player.user_id)
+                    NetworkHandler.SendPacket(plr.socket, type, data);
+            
+        }
+    }
+
+    BroadcastAll(type, data){
+        const NetworkHandler = require("./../Networking/NetworkHandler.js");
+
+        if(this.host != null){
+            NetworkHandler.SendPacket(this.host.socket, type, data);
+        }
+
+        for(var i = 0;i < this.players.length; i++){
+            var plr = this.players[i];
+
+            if(plr != null)
+                NetworkHandler.SendPacket(plr.socket, type, data);
+            
+        }
+    }
+
+    BroadcastPartyDataChange(){
+        const PacketTypes = require("./../Networking/PacketTypes.js");
+        
+        //Getting all of the players user ids
+        var plrs = [];
+        for (var i = 0; i < this.players.length; i++) {
+            var plr = this.players[i];
+            
+            if(plr != null)
+                plrs.push({user_id : plr.user_id, username : plr.username});
+        }
+
+        //Broadcasting data to the whole party
+        var data = {host:{user_id:this.host.user_id, username:this.host.username}, players: plrs};
+        this.BroadcastAll(PacketTypes.party_set_status, data);
+    }
+
     SetHost(player) {
         this.host = player;
-        player.party = this;
+        player.party_id = this.id;
     }
 
     AddPlayer(player) {
@@ -51,11 +104,15 @@ class Party {
                     is_in_party = true;
                 }
 
-                if (!is_in_party) {
+                //If the player is not in the party lets add him
+                if (is_in_party == false) {
                     this.players.push(player);
-                    player.party = this;
+                    player.party_id = this.id;
                     NetworkHandler.SendPacket(player.socket, PacketTypes.party_join_response, { outcome: "Success", reason: "Party Not Found" });
-                } else {
+                
+                    this.BroadcastPartyDataChange();
+                } 
+                else {
                     NetworkHandler.SendPacket(player.socket, PacketTypes.party_join_response, { outcome: "Fail", reason: "Already Joined" });
                 }
             } else {

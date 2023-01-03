@@ -7,7 +7,7 @@ class Game {
     static CreatePlayer(user_id, username) {
         Game.player = new Player();
         Game.player.user_data.user_id = user_id;
-        Game.player.username = username;
+        Game.player.user_data.username = username;
     }
 
     static Update() {
@@ -15,7 +15,7 @@ class Game {
     if (button1.IsHeld(mouse_position.x, mouse_position.y, mouse_buttons[0]))
         console.log("Is Pressed");
     else
-        console.log("Is not Pressed");
+        console.log("Is not Pressed"); 
     */
     }
     static Draw() {

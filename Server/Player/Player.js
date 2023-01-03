@@ -7,7 +7,7 @@ module.exports = class Player {
     user_id = null;
     username = null;
 
-    party = null;
+    party_id = null;
 
     constructor(socket) {
         this.socket = socket;
