@@ -4,6 +4,11 @@ class Game {
     static Init() {
     }
 
+    static Start(){
+        //Start Game
+        GUIHandler.SetGuisToHandle([GameScreen]);
+    }
+
     static CreatePlayer(user_id, username) {
         Game.player = new Player();
         Game.player.user_data.user_id = user_id;

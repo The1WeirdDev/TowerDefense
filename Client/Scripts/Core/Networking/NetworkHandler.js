@@ -158,5 +158,7 @@ class NetworkHandler {
         console.log("Starting Game");
         PartyScreen.start_game_button.enabled = true;
         PartyScreen.leave_party_button.enabled = true;
+
+        Game.Start();
     }
 }
