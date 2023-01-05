@@ -1,2 +1,9 @@
-#Ignore Modules
+#Folders To Ingore
 node_modules/
+.config/
+.git/
+.upm/
+
+#Files To Ignore
+.replit
+replit.nix
