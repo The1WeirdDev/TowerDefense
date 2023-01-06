@@ -30,8 +30,7 @@ module.exports = class PartyManager {
         var party = PartyManager.GetPartyFromId(player.party_id);
 
         if(party){
-            const PacketTypes = require("./../Networking/PacketTypes.js");
-            party.BroadcastAll(PacketTypes.start_game, null);
+            party.StartGame();
         }
     }
 
@@ -94,6 +93,7 @@ module.exports = class PartyManager {
                 }
             }
         }else{
+
         }
     }
 }

@@ -107,8 +107,9 @@ class Keyboard {
                 Display.OpenFullscreen();
             else
                 Display.CloseFullscreen();
-        } else {
-            Keyboard.keys_pressed.push(new Key(e.keyCode, e.key));
+            return;
         }
+
+        Keyboard.keys_pressed.push(new Key(e.keyCode, e.key));
     }
 }

@@ -1,6 +1,19 @@
 class GameScreen{
-    static Init(){}
+    static initialized = true;
+
+    static Init(){
+        if(GameScreen.initialized == false){
+
+            GameScreen.initialized = true;
+        }
+    }
     static Update(){}
-    static Draw(){}
-    static CleanUp(){}
+    static Draw(){
+        MeshRenderer.DrawMesh(GameScreen.mesh);
+    }
+    static CleanUp(){
+        if(GameScreen.initialized){
+
+        }
+    }
 }

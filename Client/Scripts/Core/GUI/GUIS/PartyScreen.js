@@ -1,5 +1,7 @@
 class PartyScreen {
     static initialized = false;
+
+    static party_id_label = null;
     
     static start_game_button = null;
     static leave_party_button = null;
@@ -15,6 +17,8 @@ class PartyScreen {
             PartyScreen.start_game_button.SetTextCentered(false);
             PartyScreen.start_game_button.SetText("Start game");
             PartyScreen.start_game_button.on_pressed = PartyScreen.OnStartGamePressed;
+
+            PartyScreen.party_id_label = new TextLabel(-8, -4, 4, 2, 150, false, "Balls");
 
             PartyScreen.leave_party_button = new Button(5.25, -4, 3, 1);
             PartyScreen.leave_party_button.frame_color = new Vector4(0.5, 0.5, 0.5, 1.0);
@@ -37,6 +41,7 @@ class PartyScreen {
         if(Party.host.user_id == Game.player.user_data.user_id)
             UIRenderer.DrawButton(shader, PartyScreen.start_game_button);
 
+        UIRenderer.DrawTextLabel(shader, PartyScreen.party_id_label);
         UIRenderer.DrawButton(shader, PartyScreen.leave_party_button);
 
         for(var i = 0;i < PartyScreen.player_labels.length; i++){
@@ -46,6 +51,7 @@ class PartyScreen {
 
     static CleanUp() {
         if (PartyScreen.initialized) {
+            PartyScreen.party_id_label.CleanUp();
             PartyScreen.start_game_button.CleanUp();
             PartyScreen.leave_party_button.CleanUp();
             PartyScreen.initialized = false;

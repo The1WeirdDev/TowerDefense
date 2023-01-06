@@ -10,6 +10,7 @@ class Party {
     id = null;
     host = null;
     players = [];
+    game_started = false;
 
     static valid_characters = "123456789";
 
@@ -106,11 +107,16 @@ class Party {
 
                 //If the player is not in the party lets add him
                 if (is_in_party == false) {
-                    this.players.push(player);
-                    player.party_id = this.id;
-                    NetworkHandler.SendPacket(player.socket, PacketTypes.party_join_response, { outcome: "Success", reason: "Party Not Found" });
-                
-                    this.BroadcastPartyDataChange();
+                    if(this.game_started){
+                        NetworkHandler.SendPacket(player.socket, PacketTypes.party_join_response, { outcome: "Fail", reason: "Game Started." });
+                    }
+                    else{
+                        this.players.push(player);
+                        player.party_id = this.id;
+                        NetworkHandler.SendPacket(player.socket, PacketTypes.party_join_response, { outcome: "Success", reason: "Party Not Found" });
+                    
+                        this.BroadcastPartyDataChange();
+                    }
                 } 
                 else {
                     NetworkHandler.SendPacket(player.socket, PacketTypes.party_join_response, { outcome: "Fail", reason: "Already Joined" });
@@ -125,8 +131,16 @@ class Party {
 
     RemovePlayer(player) {
         var plr_index = this.players.indexOf(player);
-        if (plr_index >= 0)
+        if (plr_index >= 0) 
             this.players.splice(plr_index, 1);
+    }
+
+    StartGame(){
+        const PacketTypes = require("./../Networking/PacketTypes.js");
+        
+        //Set Party Variable and broadcast player that it started
+        this.game_started = true;
+        this.BroadcastAll(PacketTypes.start_game, null);
     }
 }
 
