@@ -2,11 +2,13 @@ module.exports = class Game {
     players = [];
 
     constructor() {
-        Init();
+        this.Init();
     }
 
     Init() { 
-        console.log("Started Game");
+
     }
-    Update() { }
+    Update() { 
+        
+    }
 }
