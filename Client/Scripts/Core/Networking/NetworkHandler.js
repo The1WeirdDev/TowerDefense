@@ -159,6 +159,7 @@ class NetworkHandler {
         PartyScreen.start_game_button.enabled = true;
         PartyScreen.leave_party_button.enabled = true;
 
+        Game.Init();
         Game.Start();
     }
 }

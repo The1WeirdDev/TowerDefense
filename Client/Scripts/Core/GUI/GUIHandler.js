@@ -5,6 +5,7 @@ class GUIHandler {
         MainMenu.Init();
         PlayerScreen.Init();
         LoadingScreen.Init();
+        GameScreen.Init();
 
         GUIHandler.AddGuiToHandle(MainMenu);
     }
