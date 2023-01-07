@@ -1,5 +1,5 @@
 const fs = require("fs");
-const NetworkHandler = require("./../Networking/NetworkHandler.js");
+const NetworkHandler = require("../Networking/NetworkHandler.js");
 
 module.exports = class SaveHandler {
     static LoadPlayerData() {

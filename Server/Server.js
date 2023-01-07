@@ -14,7 +14,7 @@ const NOT_FOUND = "<html><h1>error 404 page not found</h1></html>";
 const OutputHandler = require("./Util/OutputHandler.js");
 const PartyManager = require("./Party/PartyManager.js");
 const NetworkHandler = require("./Networking/NetworkHandler.js");
-const SaveHandler = require("./Save/SaveHandler.js");
+const SaveHandler = require("./Util/SaveHandler.js");
 
 //Variables
 const update_rate = 60;

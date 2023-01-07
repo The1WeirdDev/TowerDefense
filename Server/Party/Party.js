@@ -1,4 +1,5 @@
 const OutputHandler = require("./../Util/OutputHandler.js");
+const Game = require("../Game/Game.js");
 /*
     The reason is because for some reason when a class is instantiated it cant access the modules 
     unless they are defined inside of each instance
@@ -10,6 +11,8 @@ class Party {
     id = null;
     host = null;
     players = [];
+
+    game = null;
     game_started = false;
 
     static valid_characters = "123456789";
@@ -139,6 +142,7 @@ class Party {
         const PacketTypes = require("./../Networking/PacketTypes.js");
         
         //Set Party Variable and broadcast player that it started
+        this.game = new Game();
         this.game_started = true;
         this.BroadcastAll(PacketTypes.start_game, null);
     }

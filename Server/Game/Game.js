@@ -5,6 +5,8 @@ module.exports = class Game {
         Init();
     }
 
-    Init() { }
+    Init() { 
+        console.log("Started Game");
+    }
     Update() { }
 }
