@@ -15,6 +15,7 @@ const OutputHandler = require("./Util/OutputHandler.js");
 const PartyManager = require("./Party/PartyManager.js");
 const NetworkHandler = require("./Networking/NetworkHandler.js");
 const SaveHandler = require("./Util/SaveHandler.js");
+const Game = require("./Game/Game.js");
 
 //Variables
 const update_rate = 60;
@@ -73,7 +74,9 @@ function Init() {
 }
 
 function Update() {
-
+    Game.games.forEach((game, index)=>{
+        game.Update();
+    })
 }
 
 Init();
