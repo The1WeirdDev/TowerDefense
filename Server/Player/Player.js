@@ -25,5 +25,11 @@ module.exports = class Player {
         this.username = "Player" + (Math.floor(Math.random() * 10000).toString());
     }
 
+    SendPacket(type, data){
+        //if(this.socket.connected){
+            this.socket.emit(type, data);
+       //}
+    }
+
     Update() { }
 }

@@ -92,8 +92,6 @@ module.exports = class PartyManager {
                     plr.party_id = null;
                 }
             }
-        }else{
-
         }
     }
 }

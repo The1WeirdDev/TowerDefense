@@ -25,6 +25,8 @@ module.exports = class PacketTypes {
     static party_deleted = "party_deleted";
     static start_game = "game_started";
 
+    static test = "test";
+
     //Asking the server for data
     static get_player_data = "get_player_data";
     static get_server_version = "get_server_version";

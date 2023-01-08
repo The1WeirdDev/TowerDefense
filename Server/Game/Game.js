@@ -13,7 +13,20 @@ module.exports = class Game {
     Init() { 
 
     }
-    Update() { 
-        console.log("Updated Game");
+
+    Update() {
+        const PacketTypes = require("./../Networking/PacketTypes.js");
+        
+        this.SendAllPlayerPackets(PacketTypes.test, "H");
+    }
+
+    SendAllPlayerPackets(type, data){
+        this.players.forEach((player, index)=>{
+            player.SendPacket(type, data);
+        });
+    }
+
+    SendPlayerPacket(player, type, data){
+        player.SendPacket(type, data);
     }
 }

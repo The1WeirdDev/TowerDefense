@@ -30,6 +30,10 @@ class NetworkHandler {
         NetworkHandler.server_socket.on(PacketTypes.start_game, NetworkHandler.OnGameStarted);
 
         NetworkHandler.server_socket.on(PacketTypes.get_player_data, NetworkHandler.OnGetPlayerData);
+
+        NetworkHandler.server_socket.on(PacketTypes.test, (data)=>{
+            console.log(data);
+        });
     }
 
     static StartTicks() {

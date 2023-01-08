@@ -143,6 +143,13 @@ class Party {
         
         //Set Party Variable and broadcast player that it started
         this.game = new Game();
+
+        //Set Game players to all of the players in the party
+        this.game.players.push(this.host);
+        this.players.forEach((player, index)=>{
+            this.game.players.push(player);
+        });
+
         this.game_started = true;
         this.BroadcastAll(PacketTypes.start_game, null);
     }
