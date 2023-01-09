@@ -1,7 +1,9 @@
 module.exports = class Game {
     static games = [];
-
     players = [];
+
+    mapdata = [];
+    mapsize = 8;
 
     constructor() {
         this.Init();
@@ -11,12 +13,13 @@ module.exports = class Game {
     }
 
     Init() { 
-
+        const MapReader = require("./../Util/MapReader.js");
+        MapReader.ReadMap("Shared/Res/Maps/map1.json");
     }
 
     Update() {
         const PacketTypes = require("./../Networking/PacketTypes.js");
-        
+
         this.SendAllPlayerPackets(PacketTypes.test, "H");
     }
 
