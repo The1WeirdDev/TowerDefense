@@ -13,8 +13,8 @@ module.exports = class Game {
     }
 
     Init() { 
-        const MapReader = require("./../Util/MapReader.js");
-        MapReader.ReadMap("Shared/Res/Maps/map1.json");
+        const Map = require("./../Maps/Map.js");
+        var map = new Map("Shared/Res/Maps/map1.json");
     }
 
     Update() {

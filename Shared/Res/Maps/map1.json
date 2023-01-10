@@ -1,11 +1,11 @@
 {
-    "mapname": "name",
+    "name": "desert",
     "difficulty":"easy",
-    "mapsize":{
+    "size":{
       "width":8,
       "height":8
     },
-    "mapdata":[
+    "data":[
       0,0,0,0,0,0,0,0,
       0,0,0,0,0,0,0,0,
       0,0,0,0,0,0,0,0,
