@@ -150,8 +150,12 @@ class Party {
             this.game.players.push(player);
         });
 
+        //Tell players game is starting
         this.game_started = true;
         this.BroadcastAll(PacketTypes.start_game, null);
+        
+        //Initialize Game
+        this.game.Init();
     }
 }
 

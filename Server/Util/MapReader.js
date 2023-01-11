@@ -12,7 +12,7 @@ module.exports = class MapReader{
             var mapsize = jsondata.size;
             var width = mapsize.width;
             var height = mapsize.height;
-            var data = mapsize.data;
+            var data = jsondata.data;
 
             return {name:name, difficulty: difficulty, size:{width:width, height:height}, data:data};
         }catch(exception){

@@ -32,7 +32,7 @@ class NetworkHandler {
         NetworkHandler.server_socket.on(PacketTypes.get_player_data, NetworkHandler.OnGetPlayerData);
 
         NetworkHandler.server_socket.on(PacketTypes.set_map_data, (data)=>{
-            console.log(data);
+            console.log("Map Data " + data);
         });
     }
 
