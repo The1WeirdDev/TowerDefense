@@ -26,6 +26,7 @@ class PacketTypes {
     static start_game = "game_started";
 
     static test = "test";
+    static set_map_data = "set_map_data";
 
     //Asking the server for data
     static get_player_data = "get_player_data";

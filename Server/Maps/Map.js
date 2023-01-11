@@ -14,8 +14,6 @@ module.exports = class Map{
         this.width = mapdata.size.width;
         this.height = mapdata.size.height;
         this.mapdata = mapdata.data;
-
-        console.log(mapdata);
     }
 
     GetBlockData(x, y){

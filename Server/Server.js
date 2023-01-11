@@ -70,6 +70,8 @@ function Init() {
     NetworkHandler.Init(io_server);
     SaveHandler.LoadPlayerData();
 
+    Game.LoadMaps();
+
     setInterval(Update, 1000 / update_rate);
 }
 

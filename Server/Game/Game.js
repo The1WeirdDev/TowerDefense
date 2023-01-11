@@ -2,6 +2,10 @@ module.exports = class Game {
     static games = [];
     players = [];
 
+    //Maps
+    map1 = null;
+
+    map = null;
     mapdata = [];
     mapsize = 8;
 
@@ -12,15 +16,27 @@ module.exports = class Game {
         Game.games.push(this);
     }
 
-    Init() { 
+    static LoadMaps(){
         const Map = require("./../Maps/Map.js");
-        var map = new Map("Shared/Res/Maps/map1.json");
+        Game.map1 = new Map("Shared/Res/Maps/map1.json");
+    }
+
+    Init() { 
+
     }
 
     Update() {
         const PacketTypes = require("./../Networking/PacketTypes.js");
 
         this.SendAllPlayerPackets(PacketTypes.test, "H");
+    }
+
+    LoadMap(map){
+        this.map = map;
+        this.mapdata = map.data;
+
+        //TODO Send Clients Map data
+        this.SendAllPlayerPackets(PacketTypes.set_map_data, this.mapdata);
     }
 
     SendAllPlayerPackets(type, data){
