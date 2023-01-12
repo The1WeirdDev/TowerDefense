@@ -1,5 +1,3 @@
-const { runInThisContext } = require("vm");
-
 module.exports = class Game {
     static games = [];
     players = [];
@@ -37,7 +35,7 @@ module.exports = class Game {
 
         //TODO Send Clients Map data
         this.SendAllPlayerPackets(PacketTypes.set_map_data, this.mapdata);
-    }
+    }z
 
     SendAllPlayerPackets(type, data){
         this.players.forEach((player, index)=>{
