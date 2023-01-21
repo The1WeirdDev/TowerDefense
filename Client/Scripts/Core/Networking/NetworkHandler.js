@@ -32,7 +32,8 @@ class NetworkHandler {
         NetworkHandler.server_socket.on(PacketTypes.get_player_data, NetworkHandler.OnGetPlayerData);
 
         NetworkHandler.server_socket.on(PacketTypes.set_map_data, (data)=>{
-            console.log("Map Data " + data);
+            var mapdata = new MapData(data.name, data.difficulty, data.size.width, data.size.height, data.background_image, data.mapdata);
+            Game.SetMapData(mapdata);
         });
     }
 

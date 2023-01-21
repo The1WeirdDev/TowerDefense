@@ -3,6 +3,7 @@ module.exports = class Map{
     difficulty = "easy";
     width = 0;
     height = 0;
+    background_image = "";
     mapdata = [];
     
     constructor(location){
@@ -13,7 +14,12 @@ module.exports = class Map{
         this.difficulty = mapdata.difficulty;
         this.width = mapdata.size.width;
         this.height = mapdata.size.height;
+        this.background_image = mapdata.background_image;
         this.mapdata = mapdata.data;
+    }
+
+    GetDataAsObject(){
+        return {name:this.name, difficulty:this.difficulty, size:{width:this.width, height:this.height}, background_image:this.background_image,mapdata:this.mapdata};
     }
 
     GetBlockData(x, y){

@@ -2,7 +2,6 @@ var gl = null;
 window.onload = Start;
 window.onbeforeunload = CleanUp;
 
-var shader = null;
 var resize_check = true;
 var update_interval = null;
 
@@ -33,7 +32,7 @@ function Init() {
     Keyboard.Init();
     GUIHandler.Init();
 
-    shader = new ShapeTexturelessShader();
+    ShaderManager.Init();
 
     /*
     ShaderManager.text_label_shader.Start();
@@ -73,17 +72,11 @@ function Update() {
 }
 
 function Draw() {
-    var ortho_matrix = MatrixHandler.CreateOrthographicProjectionMatrix(10);
-
-    shader.Start();
-    shader.LoadMatrix4(shader.projection_matrix_location, ortho_matrix);
-    shader.Stop();
-
     GUIHandler.Draw();
 }
 
 function CleanUp() {
-    shader.CleanUp();
+    ShaderManager.CleanUp();
 
     GUIHandler.CleanUp();
     NetworkHandler.CleanUp();

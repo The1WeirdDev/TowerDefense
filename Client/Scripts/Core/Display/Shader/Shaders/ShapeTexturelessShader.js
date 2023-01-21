@@ -10,7 +10,6 @@ class ShapeTexturelessShader extends Shader {
 
         void main() {
             gl_Position = projection_matrix * transformation_matrix * vec4(position, z_index, 1);
-            //gl_Position = projectionMatrix * viewMatrix * transformationMatrix * vec4(position, z_index, 1);
         }
     `;
     static fragment_data = `
@@ -22,7 +21,7 @@ class ShapeTexturelessShader extends Shader {
             gl_FragColor = vec4(color);
         }
     `;
-
+        
     projection_matrix_location = null;
     transformation_matrix_location = null;
     z_index_location = null;

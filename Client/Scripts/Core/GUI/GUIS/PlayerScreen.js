@@ -12,7 +12,7 @@ class PlayerScreen{
 
     }
     static Draw(){
-        UIRenderer.DrawTextLabel(shader, PlayerScreen.user_id_label);
+        UIRenderer.DrawTextLabel(ShaderManager.shape_textureless_shader, PlayerScreen.user_id_label);
     }
     static CleanUp(){
         PlayerScreen.user_id_label.CleanUp();

@@ -34,8 +34,8 @@ module.exports = class Game {
         this.mapdata = map.mapdata;
 
         //TODO Send Clients Map data
-        this.SendAllPlayerPackets(PacketTypes.set_map_data, this.mapdata);
-    }z
+        this.SendAllPlayerPackets(PacketTypes.set_map_data, this.map.GetDataAsObject());
+    }
 
     SendAllPlayerPackets(type, data){
         this.players.forEach((player, index)=>{

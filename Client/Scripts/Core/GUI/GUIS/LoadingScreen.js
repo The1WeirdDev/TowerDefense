@@ -7,7 +7,7 @@ class LoadingScreen {
     }
     static Update() { }
     static Draw() {
-        UIRenderer.DrawTextLabel(shader, LoadingScreen.text_label);
+        UIRenderer.DrawTextLabel(ShaderManager.shape_textureless_shader, LoadingScreen.text_label);
     }
     static CleanUp() {
         LoadingScreen.text_label.CleanUp();

@@ -5,6 +5,7 @@
       "width":8,
       "height":8
     },
+    "background_image":"Maps/Desert.png",
     "data":[
       0,0,0,0,0,0,0,0,
       0,0,0,0,0,0,0,0,

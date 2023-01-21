@@ -10,4 +10,16 @@ class MeshRenderer{
 
         shader.Stop();
     }
+    
+    static DrawBareMesh(shader, mesh){
+        shader.Start();
+        
+        shader.LoadFloat(shader.z_index_location, 0);
+        shader.LoadVector4(shader.color_location, new Vector4(1,1,1,1));
+        shader.LoadMatrix4(shader.transformation_matrix_location, MatrixHandler.CreateTransformationMatrix(new Transform2D()));
+
+        mesh.Draw();
+
+        shader.Stop();
+    }
 }

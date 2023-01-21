@@ -12,13 +12,14 @@ module.exports = class MapReader{
             var mapsize = jsondata.size;
             var width = mapsize.width;
             var height = mapsize.height;
+            var background_image = jsondata.background_image;
             var data = jsondata.data;
 
-            return {name:name, difficulty: difficulty, size:{width:width, height:height}, data:data};
+            return {name:name, difficulty: difficulty, size:{width:width, height:height}, background_image:background_image, data:data};
         }catch(exception){
             //TODO
             console.log(exception);
-            return {name:null, difficulty: "easy", size:{width:null, height:null}, data:null};
+            return {name:null, difficulty: "easy", size:{width:null, height:null}, background_image:"", data:null};
         }
     }
 }

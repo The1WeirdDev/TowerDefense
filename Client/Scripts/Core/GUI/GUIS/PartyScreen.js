@@ -39,13 +39,13 @@ class PartyScreen {
 
     static Draw() {
         if(Party.host.user_id == Game.player.user_data.user_id)
-            UIRenderer.DrawButton(shader, PartyScreen.start_game_button);
+            UIRenderer.DrawButton(ShaderManager.shape_textureless_shader, PartyScreen.start_game_button);
 
-        UIRenderer.DrawTextLabel(shader, PartyScreen.party_id_label);
-        UIRenderer.DrawButton(shader, PartyScreen.leave_party_button);
+        UIRenderer.DrawTextLabel(ShaderManager.shape_textureless_shader, PartyScreen.party_id_label);
+        UIRenderer.DrawButton(ShaderManager.shape_textureless_shader, PartyScreen.leave_party_button);
 
         for(var i = 0;i < PartyScreen.player_labels.length; i++){
-            UIRenderer.DrawTextLabel(shader, PartyScreen.player_labels[i]);
+            UIRenderer.DrawTextLabel(ShaderManager.shape_textureless_shader, PartyScreen.player_labels[i]);
         }
     }
 

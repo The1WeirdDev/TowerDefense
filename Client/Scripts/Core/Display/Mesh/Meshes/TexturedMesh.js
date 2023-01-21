@@ -15,7 +15,7 @@ class TexturedMesh extends Mesh {
             return;
         }
 
-        if(!draw_type)
+        if (!draw_type)
             draw_type = gl.STATIC_DRAW;
         
         this.vao_id = gl.createVertexArray();
@@ -63,14 +63,8 @@ class TexturedMesh extends Mesh {
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
         gl.bindVertexArray(null);
         
-        gl.enableVertexAttribArray(1);
-        gl.vertexAttribPointer(1, 2, gl.FLOAT, false, 0, 0);
-        gl.disableVertexAttribArray(1);
-
-        
         //Loading Texture
         this.texture_id = Texture.LoadTexture(gl, texture_location);
-        
 
         this.vertex_count = index_data.length;
         this.is_mesh_generated = true;
@@ -91,9 +85,7 @@ class TexturedMesh extends Mesh {
 
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, this.texture_id);
-
         gl.drawElements(gl.TRIANGLES, this.vertex_count, gl.UNSIGNED_SHORT, 0);
-
         gl.bindTexture(gl.TEXTURE_2D, null);
 
         gl.disableVertexAttribArray(1);

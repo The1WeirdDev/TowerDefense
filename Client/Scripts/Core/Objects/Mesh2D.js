@@ -15,6 +15,8 @@ class Mesh2D{
         this.mesh = new BasicMesh();
         if(vertices != null && indices != null){
             this.mesh.CreateMesh([vertices, indices]);
+        }else{
+            console.log("MeshData NULL");
         }
 
         this.transform = new Transform2D(0, 0, 1, 1);

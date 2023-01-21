@@ -37,10 +37,10 @@ class LobbyScreen {
     }
 
     static Draw() {
-        //UIRenderer.DrawFrame(shader, LobbyScreen.background_frame);
-        UIRenderer.DrawButton(shader, LobbyScreen.join_party_button);
-        UIRenderer.DrawButton(shader, LobbyScreen.create_party_button);
-        UIRenderer.DrawTextBox(shader, LobbyScreen.text_box);
+        //UIRenderer.DrawFrame(ShaderManager.shape_textureless_shader, LobbyScreen.background_frame);
+        UIRenderer.DrawButton(ShaderManager.shape_textureless_shader, LobbyScreen.join_party_button);
+        UIRenderer.DrawButton(ShaderManager.shape_textureless_shader, LobbyScreen.create_party_button);
+        UIRenderer.DrawTextBox(ShaderManager.shape_textureless_shader, LobbyScreen.text_box);
     }
 
     static CleanUp() {

@@ -32,8 +32,8 @@ class MainMenu {
 
     static Draw() {
         if (MainMenu.button && MainMenu.version){
-            UIRenderer.DrawButton(shader, MainMenu.button);
-            UIRenderer.DrawTextLabel(shader, MainMenu.version);
+            UIRenderer.DrawButton(ShaderManager.shape_textureless_shader, MainMenu.button);
+            UIRenderer.DrawTextLabel(ShaderManager.shape_textureless_shader, MainMenu.version);
         }
         else
             LoadingScreen.Draw();
