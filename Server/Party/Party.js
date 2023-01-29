@@ -35,7 +35,7 @@ class Party {
 
     Broadcast(player, type, data){
         const NetworkHandler = require("./../Networking/NetworkHandler.js");
-
+        
         if(this.host != null){
             if(this.host.user_id != player.user_id)
                 NetworkHandler.SendPacket(this.host.socket, type, data);
