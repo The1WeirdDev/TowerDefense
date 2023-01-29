@@ -116,7 +116,7 @@ class NetworkHandler {
         if(outcome == "Success"){
             PartyScreen.Init();
             GUIHandler.SetGuisToHandle([PartyScreen, PlayerScreen]);
-            console.log("Successfully created party");
+            PartyScreen.SetPartyTextLabelId(data.party_id);
         }
     }
 
@@ -132,7 +132,6 @@ class NetworkHandler {
         else if (outcome == "Success") {
             PartyScreen.Init();
             GUIHandler.SetGuisToHandle([PartyScreen, PlayerScreen]);
-            console.log("Successfully joined party");
         }
     }
 
@@ -141,13 +140,11 @@ class NetworkHandler {
 
         if(outcome == "Success"){
             GUIHandler.SetGuisToHandle([LobbyScreen, PlayerScreen]);
-            console.log("Party was deleted");
         }
     }
 
     static OnPartyDeleted(data){
         GUIHandler.SetGuisToHandle([LobbyScreen, PlayerScreen]);
-        console.log("Successfully left the party");
     }
 
     static OnGetPlayerData(data) {
@@ -160,7 +157,6 @@ class NetworkHandler {
     }
 
     static OnGameStarted(data){
-        console.log("Starting Game");
         PartyScreen.start_game_button.enabled = true;
         PartyScreen.leave_party_button.enabled = true;
 

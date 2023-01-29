@@ -31,7 +31,6 @@ class Party {
         }
 
         this.id = id_s;
-        OutputHandler.Log(this.id);
     }
 
     Broadcast(player, type, data){

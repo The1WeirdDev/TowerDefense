@@ -9,7 +9,9 @@ class Game {
     static waiting_for_map = true;
 
     static Init() {
-        Game.background_image = new Mesh2D(null, [0,0, 1,0, 0, 1, 1,1], [0,1,2, 2,1,3]);
+        Game.background_image = new Mesh2D(null, [0, 0, 0, 1, 1, 0, 1, 1], [0, 1, 2, 2, 1, 3], [1, 1, 1, 0, 0, 1, 0, 0]);
+        Game.background_image.transform.position = new Vector2(-10, -10);
+        Game.background_image.transform.scale = new Vector2(20, 20);
     }
 
     static Start(){
@@ -30,7 +32,7 @@ class Game {
 
     }
     static Draw() {
-        MeshRenderer.DrawMesh(ShaderManager.shape_textureless_shader, Game.background_image);
+        MeshRenderer.DrawMesh(ShaderManager.shape_textured_shader, Game.background_image);
     }
 
     static CleanUp() {
@@ -41,7 +43,6 @@ class Game {
         Game.map = map;
         Game.gamemapdata = Game.map.mapdata;
         Game.waiting_for_map = false;
-
-        console.log(Game.map.background_image);
+        Game.background_image.LoadTexture(Game.map.background_image);
     }
 } 

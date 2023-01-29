@@ -51,7 +51,8 @@ class Display {
     }
 
     static GetAspectRatio() {
-        return Display.width / Display.height;
+        //return Display.width / Display.height;
+        return 16 / 9;
     }
 
     static SetBackgroundColor(r, g, b) {

@@ -43,7 +43,9 @@ class Texture {
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
         };
-        image.src = "Shared/Res/Textures/" + url;
+
+        if(url)
+            image.src = "Shared/Res/Textures/" + url;
 
         return texture;
     }

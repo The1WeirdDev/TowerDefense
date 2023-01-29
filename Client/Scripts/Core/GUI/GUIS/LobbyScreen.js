@@ -37,7 +37,6 @@ class LobbyScreen {
     }
 
     static Draw() {
-        //UIRenderer.DrawFrame(ShaderManager.shape_textureless_shader, LobbyScreen.background_frame);
         UIRenderer.DrawButton(ShaderManager.shape_textureless_shader, LobbyScreen.join_party_button);
         UIRenderer.DrawButton(ShaderManager.shape_textureless_shader, LobbyScreen.create_party_button);
         UIRenderer.DrawTextBox(ShaderManager.shape_textureless_shader, LobbyScreen.text_box);

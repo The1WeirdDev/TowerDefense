@@ -4,19 +4,21 @@ class Mesh2D{
     transform = null;
     z_index = 0;
 
-    constructor(color, vertices, indices){
+    constructor(color, vertices, indices, texture_coords, texture_location){
         if(color)
             this.color = color;
         else{
             this.color = new Vector4(1, 1, 1, 1);
         }
 
-        //Creatine Mesh
-        this.mesh = new BasicMesh();
-        if(vertices != null && indices != null){
+        //Creating Mesh
+        if(texture_coords){
+            this.mesh = new TexturedMesh();
+            this.mesh.CreateMesh([vertices, indices, texture_coords, texture_location]);
+        }
+        else{
+            this.mesh = new BasicMesh();
             this.mesh.CreateMesh([vertices, indices]);
-        }else{
-            console.log("MeshData NULL");
         }
 
         this.transform = new Transform2D(0, 0, 1, 1);
@@ -28,5 +30,9 @@ class Mesh2D{
 
     CleanUp(){
         this.mesh.CleanUp();
+    }
+
+    LoadTexture(texture_location){
+        this.mesh.LoadTexture(texture_location);
     }
 }

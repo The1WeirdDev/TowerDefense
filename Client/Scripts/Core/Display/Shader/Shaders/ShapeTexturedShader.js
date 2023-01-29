@@ -2,6 +2,9 @@ class ShapeTexturedShader extends Shader {
     static vertex_data = `
         precision mediump float;
         attribute vec2 position;
+        attribute vec2 texture_coord;
+
+        varying vec2 texture_coord_output;
         
         uniform mat4 projection_matrix;
         uniform mat4 transformation_matrix;
@@ -9,16 +12,20 @@ class ShapeTexturedShader extends Shader {
         uniform float z_index;
 
         void main() {
-            gl_Position = vec4(position, 0, 1);
+            texture_coord_output = texture_coord;
+            gl_Position = projection_matrix * transformation_matrix * vec4(position, z_index, 1);
         }
     `;
     static fragment_data = `
         precision mediump float;
+
+        uniform sampler2D game_texture;
         
+        varying vec2 texture_coord_output;
         uniform vec4 color;
         
         void main() {
-            gl_FragColor = vec4(1, 1, 1, 1);
+            gl_FragColor = texture2D(game_texture, texture_coord_output);
         }
     `;
     /*

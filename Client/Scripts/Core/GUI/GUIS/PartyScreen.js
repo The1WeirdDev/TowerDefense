@@ -18,7 +18,7 @@ class PartyScreen {
             PartyScreen.start_game_button.SetText("Start game");
             PartyScreen.start_game_button.on_pressed = PartyScreen.OnStartGamePressed;
 
-            PartyScreen.party_id_label = new TextLabel(-8, -4, 4, 2, 150, false, "Balls");
+            PartyScreen.party_id_label = new TextLabel(-8, -4, 2.5, 1, 135, false, "Balls");
 
             PartyScreen.leave_party_button = new Button(5.25, -4, 3, 1);
             PartyScreen.leave_party_button.frame_color = new Vector4(0.5, 0.5, 0.5, 1.0);
@@ -56,6 +56,10 @@ class PartyScreen {
             PartyScreen.leave_party_button.CleanUp();
             PartyScreen.initialized = false;
         }
+    }
+
+    static SetPartyTextLabelId(id){
+        PartyScreen.party_id_label.SetText(id);
     }
 
     static OnSetPartyData(data){

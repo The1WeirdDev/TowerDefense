@@ -1,3 +1,5 @@
+const Tower = require("./Tower/Tower.js");
+
 module.exports = class Game {
     static games = [];
     players = [];
@@ -5,6 +7,8 @@ module.exports = class Game {
     //Maps
     map1 = null;
 
+    towers = [];
+    
     map = null;
     mapdata = [];
     mapsize = 8;

@@ -64,7 +64,7 @@ class TexturedMesh extends Mesh {
         gl.bindVertexArray(null);
         
         //Loading Texture
-        this.texture_id = Texture.LoadTexture(gl, texture_location);
+        this.LoadTexture(texture_location);
 
         this.vertex_count = index_data.length;
         this.is_mesh_generated = true;
@@ -106,6 +106,10 @@ class TexturedMesh extends Mesh {
         gl.deleteBuffer(this.tbo_id);
         gl.deleteBuffer(this.ebo_id);
         gl.deleteVertexArray(this.vao_id);
+    }
+
+    LoadTexture(texture_location){
+        this.texture_id = Texture.LoadTexture(gl, texture_location);
     }
 
     RemakeVertices(vertices) {
