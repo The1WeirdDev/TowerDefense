@@ -28,6 +28,7 @@ class ShapeTexturedShader extends Shader {
             gl_FragColor = texture2D(game_texture, texture_coord_output);
         }
     `;
+    
     /*
     static vertex_data = `
         precision mediump float;

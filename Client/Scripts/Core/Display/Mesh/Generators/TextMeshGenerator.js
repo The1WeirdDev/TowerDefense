@@ -85,6 +85,7 @@ class TextMeshGenerator {
 
         root.forEach(process);
 
+        //Centering the text if it is asked
         var vertices = [];
         if (centered) {
             for (var i = 0; i < vertexData.length; i++) {
@@ -99,6 +100,7 @@ class TextMeshGenerator {
             }
         }
 
+        //Making the text size smaller to fit within the view matrix
         for (var i = 0; i < vertexData.length; i++) {
             if (i % 2 == 0)
                 vertices[i] = vertices[i] * 0.00520833333;

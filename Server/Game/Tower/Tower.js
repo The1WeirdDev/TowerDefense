@@ -1,20 +1,13 @@
 module.exports = class Tower{
     game = null;
 
-    name="tower";
-    fire_rate = 1;
-    damage = 1;
-    radius = 5;
-
+    tower_data = null;
     last_fired = 0;
     
-    constructor(game, name, fire_rate, damage, radius){
+    constructor(game, tower_data){
         this.game = game;
 
-        this.name = name;
-        this.fire_rate = fire_rate;
-        this.damage = damage;
-        this.radius = radius;
+        this.tower_data = tower_data;
         
         this.Init();
     }

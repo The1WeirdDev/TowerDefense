@@ -1,14 +1,21 @@
 class Tower{
     mesh2d = null;
     
-    name="tower";
-    fire_rate = 1;
-    damage = 1;
+    tower_data = null;
+    last_fired = 0;
     
-    constructor(){}
+    constructor(game, tower_data){
+        this.game = game;
+
+        this.tower_data = tower_data;
+        
+        this.Init();
+    }
 
     Init(){}
     Update(){}
-    Draw(){}
-    CleanUp(){}
+
+    Shoot(){
+
+    }
 }

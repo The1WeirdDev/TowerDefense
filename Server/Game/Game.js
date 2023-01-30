@@ -30,6 +30,15 @@ module.exports = class Game {
     Update() {
 
     }
+    
+    AddEntity(entity){
+        //TODO : Add Entity
+    }
+    
+    AddTower(tower_data){
+        var tower = new Tower(this, tower_data);
+        this.towers.push(tower);
+    }
 
     LoadMap(map){
         const PacketTypes = require("./../Networking/PacketTypes.js");
@@ -37,7 +46,7 @@ module.exports = class Game {
         this.map = map;
         this.mapdata = map.mapdata;
 
-        //TODO Send Clients Map data
+        //Telling Players the map
         this.SendAllPlayerPackets(PacketTypes.set_map_data, this.map.GetDataAsObject());
     }
 

@@ -15,7 +15,7 @@ class Party {
     game = null;
     game_started = false;
 
-    static valid_characters = "123456789";
+    static valid_id_characters = "123456789";
 
     constructor() {
         this.GeneratePartyID();
@@ -26,8 +26,8 @@ class Party {
     GeneratePartyID() {
         var id_s = "";
         for (var i = 0; i < Party.id_length; i++) {
-            var r_num = Math.floor(Math.random() * (Party.valid_characters.length - 1));
-            id_s += Party.valid_characters[r_num];
+            var r_num = Math.floor(Math.random() * (Party.valid_id_charactersRun.length - 1));
+            id_s += Party.valid_id_characters[r_num];
         }
 
         this.id = id_s;

@@ -33,6 +33,8 @@ class Game {
     }
     static Draw() {
         MeshRenderer.DrawMesh(ShaderManager.shape_textured_shader, Game.background_image);
+
+        this.DrawInventory();
     }
 
     static CleanUp() {
@@ -44,5 +46,9 @@ class Game {
         Game.gamemapdata = Game.map.mapdata;
         Game.waiting_for_map = false;
         Game.background_image.LoadTexture(Game.map.background_image);
+    }
+
+    static DrawInventory(){
+
     }
 } 
