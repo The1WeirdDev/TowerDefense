@@ -97,6 +97,8 @@ class Party {
             if (this.players.length < this.max_players - 1) {
                 var is_in_party = false;
 
+                //Checking if player is already in party
+                //If so we just tell him he cant join a party he is already in
                 for (var i = 0; i < this.players.length; i++) {
                     if (this.players[i].user_id == player.user_id) {
                         is_in_party = true;
@@ -109,9 +111,8 @@ class Party {
 
                 //If the player is not in the party lets add him
                 if (is_in_party == false) {
-                    if(this.game_started){
+                    if(this.game_started)
                         NetworkHandler.SendPacket(player.socket, PacketTypes.party_join_response, { outcome: "Fail", reason: "Game Started." });
-                    }
                     else{
                         this.players.push(player);
                         player.party_id = this.id;
